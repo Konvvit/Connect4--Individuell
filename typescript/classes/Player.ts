@@ -3,7 +3,6 @@ import Board from './Board.js';
 
 
 export default class Player {
-
   name: string;
   color: string;
   board: Board;
