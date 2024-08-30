@@ -37,6 +37,46 @@ constructor() {
   }
   
 
+  // Main game loop, handle players movements until the game is over.
+
+      startGameLoop(): void {
+    while (!this.board.gameOver) {
+        console.clear();
+        this.board.render();
+        const currentPlayer: Player = this.board.currentPlayerColor === 'X' ? this.playerX : this.playerO;
+
+        let moveValid = false;
+         
+      //Handle valid moves 
+      
+        while (!moveValid) {
+            const moveInput: string = prompt(`Hey ${currentPlayer.name}, make your move (${currentPlayer.color}): `);
+            const columnIndex: number = +moveInput.trim() - 1;
+
+            if (isNaN(columnIndex)) {
+                console.log('Invalid input. Please enter a number between 1 and 7.');
+                prompt('Hit enter to try again.');
+                continue;
+            }
+
+            if (columnIndex < 0 || columnIndex >= 7) {
+                console.log('Out of range. Choose a number from 1 to 7.');
+                prompt('Press enter to retry.');
+                continue;
+            }
+
+            moveValid = this.board.makeMove(columnIndex);
+
+            if (!moveValid) {
+                console.log('This column is full. Please pick another one.');
+                prompt('Press enter to select a different column.');
+                continue;
+            }
+        }
+    }
+}
+
+
   
   
   

@@ -1,3 +1,5 @@
+import makeMove from './MakeMove.js';
+
 export default class Board {
 
  matrix: Array<Array<string>>;
@@ -17,7 +19,23 @@ export default class Board {
     this.winner = false;
     this.isADraw = false;
     this.gameOver = false;
-  
+  }
+
+    // Render the board with visualization
+  render(): void {
+    let line = '\n' + '-'.repeat(29) + '\n';
+    console.log(
+      line +
+      this.matrix.map(row =>
+        row.map(column => `| ${column} `).join('')
+        + '|').join(line) +
+      line
+    );
+  }
+
+   // Make a move in a specific column
+  makeMove(column: number): boolean {
+    return makeMove(this, column);
   }
 
 }
