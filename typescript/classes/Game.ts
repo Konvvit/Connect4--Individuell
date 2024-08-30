@@ -19,8 +19,8 @@ constructor() {
   while (true) {
     this.createPlayers();
     this.board = new Board();
-    //this.startGame();
-    //this.WhoHasWonOnGameOver();
+    this.startGameLoop();
+    this.whoHasWonOnGameOver();
       console.log('');
       const playAgain: string = prompt('Do you want to play again? (yes/no)? ');
       if (playAgain !== 'yes') { break; }
@@ -76,30 +76,42 @@ constructor() {
     }
 }
 
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
+   // The Game is over, annouce the result wincheck/drawcheck. 
+    whoHasWonOnGameOver(): void {
+        console.clear();
+        this.board.render();
+        if (this.board.winner) {
+            const winningPlayer: Player = this.board.winner === 'X' ? this.playerX : this.playerO;
+            console.log(`Congratulations ${winningPlayer.color}: ${winningPlayer.name} you won!`);
+        } else {
+            console.log('Unfortunately it was a draw...');
+        }
+    }
 }
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+

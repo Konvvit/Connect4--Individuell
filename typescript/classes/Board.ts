@@ -38,4 +38,10 @@ export default class Board {
     return makeMove(this, column);
   }
 
+    // Check for a draw
+  drawCheck(): boolean {
+    // If no players has won, and column is full its a draw
+    return !this.winner && !this.matrix.flat().includes(' ');
+  }
+
 }
