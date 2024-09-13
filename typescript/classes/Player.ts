@@ -1,6 +1,7 @@
 import Board from './Board.js';
 import makeMove from './MakeMove.js';
 
+// I could have separated the AI logic into a different TypeScript file. However, since the Player.ts file has very little code and this is a last-minute adjustment, I decided not to separate it.
 
 export default class Player {
   name: string;
@@ -18,7 +19,8 @@ export default class Player {
   }
 
 
-
+  // Ai logic starts here 
+  
 makeComputerMove(): number {
     if (this.aiDifficulty === 'easy') {
       return this.makeRandomMove();
@@ -27,33 +29,33 @@ makeComputerMove(): number {
     }
     throw new Error('AI difficulty not set.');
   }
-
+  // Easy mode Ai logic basically make random moves 
   makeRandomMove(): number {
     const availableColumns = this.board.matrix[0].map((_, colIndex) => colIndex).filter(colIndex => this.board.matrix[0][colIndex] === ' ');
     return availableColumns[Math.floor(Math.random() * availableColumns.length)];
   }
-
+  // Hard mode Ai logic, Making Ai think more and move more strategically than easy mode Ai 
   makeStrategicMove(): number {
     // Try to win
     const winningMove = this.findWinningMove(this.color);
     if (winningMove !== null) return winningMove;
 
-    // Try to block opponent from winning
+    // Try to block player if they have a win condition move
     const blockingMove = this.findWinningMove(this.color === 'X' ? 'O' : 'X');
     if (blockingMove !== null) return blockingMove;
 
-    // If no immediate win or block, make a random move
+  
     return this.makeRandomMove();
   }
 
   findWinningMove(color: string): number | null {
     for (let col = 0; col < this.board.matrix[0].length; col++) {
       if (this.board.matrix[0][col] === ' ') {
-        // Temporarily make the move
+       
         const tempBoard = this.cloneBoard();
         tempBoard.matrix[this.findAvailableRow(tempBoard, col)][col] = color;
 
-        // Check if this move results in a win
+        // Check if this move results in a win condition
         if (this.checkWin(tempBoard, color)) {
           return col;
         }
