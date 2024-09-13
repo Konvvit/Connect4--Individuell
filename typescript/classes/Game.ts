@@ -36,7 +36,10 @@ constructor() {
             this.playerX = new Player(prompt('Player X\'s name: '), 'X', this.board);
             this.playerO = new Player(prompt('Player O\'s name: '), 'O', this.board);
         } else if (gameMode === '2') {
-       
+            this.playerX = new Player(prompt('Player name: '), 'X', this.board);
+            const aiMode = prompt('Choose AI mode: (1) Easy or (2) Hard: ');
+            this.playerO = new Player('AI', 'O', this.board, true, aiMode === '1' ? 'easy' : 'hard');
+        } else {
             console.log('Invalid game mode selected.');
             this.createPlayers(); // Re-prompt for valid mode
         }
