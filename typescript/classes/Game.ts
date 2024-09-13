@@ -6,8 +6,6 @@ import Player from './Player.js';
 
 export default class Game {
   board: Board;
-
-
   // Added compilerOptions: "strictPropertyInitialization": false to tsconfig.json to get rid of player error.
   playerX: Player;
   playerO: Player;
@@ -15,9 +13,9 @@ export default class Game {
 
 
 constructor() {
-
+  this.createPlayers();
+  
   while (true) {
-    this.createPlayers();
     this.board = new Board();
     this.startGameLoop();
     this.whoHasWonOnGameOver();
