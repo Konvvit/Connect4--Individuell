@@ -27,12 +27,20 @@ constructor() {
 
 
   //handle players creations
-  createPlayers(): void {
-    console.clear();
-    console.log('CONNECT 4\n');
-    this.playerX = new Player(prompt('Spelare X:s namn: '), 'X', this.board);
-    this.playerO = new Player(prompt('Spelare O:s namn: '), 'O', this.board);
-  }
+   createPlayers(): void {
+        console.clear();
+        console.log('CONNECT 4\n');
+        const gameMode = prompt('Choose game mode: (1) Player vs Player or (2) Player vs AI: ');
+
+        if (gameMode === '1') {
+            this.playerX = new Player(prompt('Player X\'s name: '), 'X', this.board);
+            this.playerO = new Player(prompt('Player O\'s name: '), 'O', this.board);
+        } else if (gameMode === '2') {
+       
+            console.log('Invalid game mode selected.');
+            this.createPlayers(); // Re-prompt for valid mode
+        }
+    }
   
 
   // Main game loop, handle players movements until the game is over.
